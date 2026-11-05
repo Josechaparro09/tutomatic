@@ -2,10 +2,10 @@ node_modules/
 *.log
 # configuración y datos de cada equipo (no se suben)
 .env
-tutomatic.config.yaml
-tuto.config.yaml
+/tutomatic.config.yaml
+/tuto.config.yaml
 *.bak
-tutomatic.skill
+/tutomatic.skill
 .auth.json
 voces/
 # proyectos: solo se versionan los demos

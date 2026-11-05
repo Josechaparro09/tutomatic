@@ -329,5 +329,5 @@ export async function runSetup({ only }: { only?: string } = {}) {
     if (e?.name === 'ExitPromptError') { console.log('\n' + c.yellow('Configuración cancelada. Lo que ya respondiste quedó guardado.')); return; }
     throw e;
   }
-  console.log('\n' + c.bold(c.green('✔ Listo.')) + ' Revisa todo con ' + c.bold('tutomatic doctor') + '. Para probar sin gastar: ' + c.bold('tutomatic build facturin-nueva-factura --mock --draft'));
+  console.log('\n' + c.bold(c.green('✔ Listo.')) + ' Revisa todo con ' + c.bold('tutomatic doctor') + '. Para probar sin gastar: ' + c.bold('tutomatic demo'));
 }

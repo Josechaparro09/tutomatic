@@ -1,0 +1,45 @@
+# Configuración de Tutomatic en este equipo. La crea y edita `tutomatic setup`; también puedes editarla a mano.
+# Cada storyboard puede sobreescribir voz y música.
+projectsDir: projects
+
+providers:
+  tts:
+    provider: google              # google | voicestudio (local) | elevenlabs | openai | mock
+                                  # voicestudio: model omnivoice, voice <id de `tutomatic voices`>, language es, params {...}
+    model: gemini-3.8-flash-tts   # o gemini-3.8-flash-lite-tts (más barato, para borradores)
+    voice: Kore                   # Kore, Puck, Charon, Aoede, Leda, Orus, Zephyr… (30 voces)
+    style: "Narrador de tutorial: cálido, claro y cercano, ritmo pausado, español latinoamericano neutro."
+  music:
+    provider: google              # google | mock
+    model: lyria-3.5              # o lyria-3-clip-preview (30 s, se repite en bucle)
+  image:
+    provider: google              # usado por: tutomatic thumbnail --ai
+    model: gemini-2.5-flash-image
+
+recorder:
+  mode: screencast        # screencast (CDP, alta calidad) | playwright (recordVideo)
+  headless: true
+  cursor: true            # cursor animado con onda al hacer clic
+  typingDelayMs: 55       # velocidad de tecleo visible
+  cursorSpeed: 1          # >1 más rápido
+  minStepSeconds: 1.6
+  gapAfterVoice: 0.45     # respiro tras cada frase
+
+render:
+  engine: hyperframes     # hyperframes | remotion
+  fps: 30
+  width: 1920
+  height: 1080
+  quality: high           # draft | standard | high  (usa --draft para borradores)
+  gpu: auto               # auto | off | nvenc (NVIDIA) | amf (AMD) | qsv (Intel) | videotoolbox (Mac) | vaapi (Linux)
+  encoderPreset: veryfast # libx264 sin GPU: ultrafast…medium (más rápido = archivo algo más grande)
+  # concurrency: 4        # cuadros en paralelo; vacío = automático
+  zoom: 1.6               # zoom por defecto en clics/campos
+  captions: true          # subtítulos quemados en el video (además del .srt)
+  browserFrame: true      # la grabación va dentro de un marco de navegador
+
+subtitles:
+  maxChars: 42
+
+design:
+  default: ruta           # estilo que `tutomatic init` copia a cada proyecto: ruta | etiqueta | suave | none

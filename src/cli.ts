@@ -107,6 +107,29 @@ program.command('update').description('Baja la última versión (git pull), rein
     log.ok('Tutomatic actualizado. Si la app de Claude usa la skill, vuelve a subir tutomatic.skill para tener la última versión.');
   }));
 
+// ───────────────────────── demo
+program.command('demo').description('Prueba todo con la app de ejemplo (Facturín), sin gastar: ensayo + video borrador con voz y música falsas')
+  .option('--real', 'usar tus proveedores reales de voz y música en vez de los falsos')
+  .action(wrap(async (o) => {
+    const { spawn, spawnSync } = await import('node:child_process');
+    const up = async () => fetch('http://localhost:4321/login', { signal: AbortSignal.timeout(1500) }).then(() => true, () => false);
+    let server: any = null;
+    if (!(await up())) {
+      log.step('Iniciando la app de ejemplo en http://localhost:4321 …');
+      server = spawn(process.execPath, [path.join(REPO_ROOT, 'examples', 'demo-app', 'server.js')], { stdio: 'ignore' });
+      for (let i = 0; i < 20 && !(await up()); i++) await new Promise((r) => setTimeout(r, 300));
+    }
+    const me = path.join(REPO_ROOT, 'bin', 'tutomatic.js');
+    const env = { ...process.env, ...(o.real ? {} : { TUTO_PROVIDER: 'mock' }) };
+    try {
+      for (const args of [['rehearse', 'facturin-nueva-factura'], ['build', 'facturin-nueva-factura', '--draft', '--force']]) {
+        const r = spawnSync(process.execPath, [me, ...args], { stdio: 'inherit', env, cwd: REPO_ROOT });
+        if (r.status !== 0) throw new Error(`Falló: tutomatic ${args.join(' ')}`);
+      }
+    } finally { server?.kill(); }
+    log.ok('Demo listo: si ves el video en projects/facturin-nueva-factura/output/, todo está bien instalado.');
+  }));
+
 // ───────────────────────── doctor
 program.command('doctor').description('Verifica dependencias, claves y proveedores').action(wrap(async () => {
   const cfg = loadConfig();
