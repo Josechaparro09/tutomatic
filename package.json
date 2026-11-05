@@ -1,0 +1,45 @@
+{
+  "name": "tutomatic",
+  "version": "0.1.0",
+  "description": "Tutomatic: CLI + skill para que una IA grabe y produzca videos tutoriales de una app web (voz, música, subtítulos, diseño) con HyperFrames o Remotion.",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "tutomatic": "bin/tutomatic.js",
+    "tuto": "bin/tuto.js"
+  },
+  "scripts": {
+    "tutomatic": "tsx src/cli.ts",
+    "setup": "tsx src/cli.ts setup",
+    "typecheck": "tsc --noEmit",
+    "demo-app": "node examples/demo-app/server.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@google/genai": "^2.30.0",
+    "@inquirer/prompts": "^8.7.5",
+    "@remotion/bundler": "^4.0.535",
+    "@remotion/cli": "^4.0.535",
+    "@remotion/renderer": "^4.0.535",
+    "@types/adm-zip": "^0.5.8",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "adm-zip": "^0.6.1",
+    "commander": "^15.0.0",
+    "dotenv": "^18.0.8",
+    "ffmpeg-static": "^5.3.0",
+    "ffprobe-static": "^3.1.0",
+    "gsap": "^3.14.2",
+    "hyperframes": "^0.8.162",
+    "playwright": "^1.64.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.535",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  }
+}

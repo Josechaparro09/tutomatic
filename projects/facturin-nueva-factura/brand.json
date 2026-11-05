@@ -1,0 +1,13 @@
+{
+  "name": "Facturín",
+  "primary": "#14b8a6",
+  "secondary": "#72d4ca",
+  "background": "#071f20",
+  "surface": "#0f353d",
+  "text": "#F5F7FF",
+  "mutedText": "#B4BBD3",
+  "fontFamily": "Inter",
+  "logo": "brand/logo.png",
+  "theme": "dark",
+  "radius": 18
+}

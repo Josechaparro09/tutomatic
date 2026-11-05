@@ -1,0 +1,195 @@
+{
+  "$schema": "../../schema/storyboard.schema.json",
+  "title": "Cómo crear una factura en Facturín",
+  "subtitle": "En menos de un minuto",
+  "language": "es-CO",
+  "audience": "Dueños de pequeños negocios que usan Facturín por primera vez",
+  "goal": "Crear y guardar una factura nueva para un cliente existente",
+  "app": {
+    "url": "http://localhost:4321",
+    "start": "/",
+    "viewport": {
+      "width": 1440,
+      "height": 810
+    },
+    "displayUrl": "app.facturin.co"
+  },
+  "login": {
+    "url": "/login",
+    "steps": [
+      {
+        "action": "fill",
+        "selector": "label:Correo",
+        "value": "demo@facturin.co"
+      },
+      {
+        "action": "fill",
+        "selector": "label:Contraseña",
+        "value": "demo123"
+      },
+      {
+        "action": "click",
+        "selector": "role:button|Ingresar",
+        "waitFor": "url:**/"
+      }
+    ],
+    "record": false
+  },
+  "voice": {},
+  "music": {
+    "enabled": true,
+    "volume": 0.18,
+    "prompt": "Light, modern, optimistic lo-fi background music for a software tutorial, soft synth pads and gentle plucks, 95 BPM"
+  },
+  "intro": {
+    "narration": "En este tutorial vas a aprender a crear una factura en Facturín, paso a paso."
+  },
+  "outro": {
+    "title": "¡Factura creada!",
+    "subtitle": "Así de fácil se factura en Facturín",
+    "cta": "Crea tu primera factura hoy",
+    "narration": "¡Y listo! Ya sabes cómo crear una factura. Ahora inténtalo tú."
+  },
+  "steps": [
+    {
+      "id": "panel",
+      "title": "Tu panel de inicio",
+      "narration": "Al ingresar verás tu panel, con lo facturado este mes y lo pendiente de cobro.",
+      "action": "hover",
+      "selector": "text:Facturado este mes",
+      "zoom": false,
+      "chapter": "Panel de inicio"
+    },
+    {
+      "id": "ir-facturas",
+      "title": "Abre Facturas",
+      "narration": "Para crear una factura, entra a la sección Facturas en el menú lateral.",
+      "action": "click",
+      "selector": "role:link|🧾 Facturas",
+      "waitFor": "url:**/facturas",
+      "chapter": "Crear la factura"
+    },
+    {
+      "id": "nueva",
+      "title": "Nueva factura",
+      "narration": "Luego, haz clic en el botón Nueva factura.",
+      "action": "click",
+      "selector": "role:link|＋ Nueva factura",
+      "highlight": true,
+      "waitFor": "url:**/facturas/nueva"
+    },
+    {
+      "id": "cliente",
+      "title": "Elige el cliente",
+      "narration": "Busca el cliente escribiendo su nombre.",
+      "action": "type",
+      "selector": "role:combobox|Cliente",
+      "value": "Pana"
+    },
+    {
+      "id": "cliente-elegir",
+      "narration": "Y elígelo de la lista.",
+      "action": "click",
+      "selector": "role:option|Panadería La Espiga",
+      "highlight": true
+    },
+    {
+      "id": "concepto",
+      "title": "Describe el servicio",
+      "narration": "Escribe el concepto, es decir, qué producto o servicio estás cobrando.",
+      "action": "type",
+      "selector": "label:Concepto",
+      "value": "Fotografía de producto"
+    },
+    {
+      "id": "valor",
+      "title": "Ingresa el valor",
+      "narration": "Ingresa el valor en pesos colombianos.",
+      "action": "type",
+      "selector": "label:Valor (COP)",
+      "value": "950000"
+    },
+    {
+      "id": "cod",
+      "title": "Pago contra entrega",
+      "narration": "Si tu cliente paga al recibir el pedido, activa Pago contra entrega.",
+      "action": "check",
+      "selector": "near:Pago contra entrega|switch",
+      "highlight": true
+    },
+    {
+      "id": "monto-cod",
+      "narration": "Y escribe el monto que el mensajero debe cobrar.",
+      "action": "type",
+      "selector": "label:Monto a cobrar al entregar (COP)",
+      "value": "950000"
+    },
+    {
+      "id": "copia",
+      "narration": "Si quieres que tu cliente reciba la factura por correo, marca esta casilla. En este ejemplo no la usaremos.",
+      "action": "hover",
+      "selector": "role:checkbox|Enviar copia de la factura al cliente por correo",
+      "zoom": 1.4
+    },
+    {
+      "id": "guardar",
+      "title": "Guarda",
+      "narration": "Haz clic en Guardar factura y revisa el resumen.",
+      "action": "click",
+      "selector": "role:button|Guardar factura",
+      "highlight": true,
+      "waitFor": "role:dialog"
+    },
+    {
+      "id": "confirmar",
+      "narration": "Si todo está bien, confirma.",
+      "action": "click",
+      "selector": "role:button|Confirmar",
+      "waitFor": "url:**/facturas?ok=*"
+    },
+    {
+      "id": "confirmacion",
+      "title": "¡Lista!",
+      "narration": "Facturín confirma que la factura se creó, y ya aparece en tu lista marcada como contra entrega.",
+      "action": "hover",
+      "selector": "text:creada correctamente",
+      "zoom": 1.4,
+      "chapter": "Confirmación"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "question": "¿Quieres mostrar también cómo enviar la factura por correo al cliente?",
+      "blocking": false,
+      "answer": "No por ahora, solo crearla."
+    },
+    {
+      "id": "campo-vence-en",
+      "question": "El formulario tiene \"Vence en\" (lista desplegable, valor actual \"30 días\") y el tutorial no lo usa. ¿Elegimos una opción (¿cuál?), solo lo explicamos, o lo omitimos?",
+      "blocking": true,
+      "answer": "Omitir: dejar 30 días por defecto (respuesta del usuario).",
+      "source": "coverage",
+      "control": "select|vence en|",
+      "selector": "label:Vence en"
+    },
+    {
+      "id": "campo-pago-contra-entrega",
+      "question": "El formulario tiene \"Pago contra entrega\": interruptor, actualmente apagado. El tutorial no lo toca. ¿Lo activamos en el video, solo lo explicamos sin tocarlo, o lo omitimos?",
+      "blocking": true,
+      "answer": "Activarlo y llenar el monto a cobrar (respuesta del usuario).",
+      "source": "coverage",
+      "control": "switch|pago contra entrega|",
+      "selector": "near:Pago contra entrega|switch"
+    },
+    {
+      "id": "campo-enviar-copia-de-la-factura-al-cliente-por-correo",
+      "question": "El formulario tiene \"Enviar copia de la factura al cliente por correo\": casilla, actualmente apagado. El tutorial no lo toca. ¿Lo activamos en el video, solo lo explicamos sin tocarlo, o lo omitimos?",
+      "blocking": true,
+      "answer": "Solo explicarlo, sin marcarlo (respuesta del usuario).",
+      "source": "coverage",
+      "control": "checkbox|enviar copia de la factura al cliente por correo|",
+      "selector": "role:checkbox|Enviar copia de la factura al cliente por correo"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+node_modules/
+*.log
+# configuración y datos de cada equipo (no se suben)
+.env
+tutomatic.config.yaml
+tuto.config.yaml
+*.bak
+tutomatic.skill
+.auth.json
+voces/
+# proyectos: solo se versionan los demos
+projects/*
+!projects/facturin-nueva-factura/
+projects/*/build/
+projects/*/output/

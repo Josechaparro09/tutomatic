@@ -1,0 +1,55 @@
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 400; src: url(design/fonts/plus-jakarta-sans-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 600; src: url(design/fonts/plus-jakarta-sans-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 700; src: url(design/fonts/plus-jakarta-sans-latin-700-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 800; src: url(design/fonts/plus-jakarta-sans-latin-800-normal.woff2) format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 500; src: url(design/fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: url(design/fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2'); }
+/* ── Estilo "Etiqueta": guía de envío. Bloques de color de marca, datos en monoespaciada, sellos. ── */
+#root { font-family: 'Plus Jakarta Sans', var(--font), system-ui, sans-serif; }
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+#bg { background: var(--bg) !important; }
+#grid { background-image: repeating-linear-gradient(-45deg, color-mix(in oklab, var(--p) 10%, transparent) 0 2px, transparent 2px 26px) !important; background-size: auto !important; opacity: .8;
+  -webkit-mask-image: none !important; mask-image: none !important; }
+#intro > :not(.e-scene), #outro > :not(.e-scene) { display: none !important; }
+.e-scene { position: absolute; inset: 0; text-align: left; }
+.e-panel { position: absolute; left: 0; top: 0; bottom: 0; width: 1130px; background: var(--p); transform-origin: left center; overflow: hidden; }
+.e-panel::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,.18) 1.6px, transparent 1.8px); background-size: 30px 30px; }
+.e-kicker { position: absolute; left: 130px; top: 170px; font-size: 24px; font-weight: 700; letter-spacing: .24em; color: rgba(255,255,255,.85); z-index: 1; }
+.e-title { position: absolute; left: 124px; top: 230px; width: 920px; font-size: 112px; line-height: 1; font-weight: 800; letter-spacing: -0.04em; color: #fff; z-index: 1; }
+.e-title .w { display: inline-block; overflow: hidden; vertical-align: top; margin-right: .15em; padding-bottom: .1em; }
+.e-title .w > span { display: inline-block; }
+.e-sub { position: absolute; left: 130px; bottom: 300px; width: 860px; font-size: 38px; font-weight: 600; color: #fff; z-index: 1; }
+.e-sub::before { content: ''; display: block; width: 90px; height: 8px; border-radius: 8px; background: var(--s); margin-bottom: 26px; }
+.e-label { position: absolute; left: 1220px; top: 150px; width: 580px; background: var(--sf); border: 4px solid var(--tx); border-radius: 22px; padding: 34px 38px;
+  box-shadow: 18px 18px 0 color-mix(in oklab, var(--tx) 14%, transparent); }
+.e-label .logo-e { height: 52px; display: block; margin-bottom: 26px; }
+.e-row { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-top: 2px dashed color-mix(in oklab, var(--tx) 30%, transparent); font-size: 24px; }
+.e-row span { color: var(--mu); letter-spacing: .12em; font-weight: 500; } .e-row b { color: var(--tx); font-weight: 700; text-align: right; }
+.e-bars { display: flex; gap: 4px; height: 92px; margin-top: 22px; align-items: stretch; }
+.e-bars i { display: block; background: var(--tx); }
+.e-code { font-size: 22px; letter-spacing: .4em; color: var(--tx); margin-top: 10px; text-align: center; }
+.e-stamp { position: absolute; padding: 14px 26px; border: 6px solid var(--s); border-radius: 16px; color: var(--s); font-size: 40px; font-weight: 800; letter-spacing: .12em;
+  background: color-mix(in oklab, var(--sf) 80%, transparent); }
+
+/* Capítulo: etiqueta con número grande, entra con un golpe (como pegar un sticker) */
+.e-tag { position: absolute; inset: auto; z-index: 8; opacity: 0; display: flex; align-items: stretch; border-radius: 18px; overflow: hidden; background: var(--sf);
+  border: 4px solid var(--tx); box-shadow: 10px 10px 0 color-mix(in oklab, var(--tx) 18%, transparent); }
+.e-tag .num { background: var(--p); color: #fff; font-size: 54px; font-weight: 700; padding: 10px 26px; display: grid; place-items: center; }
+.e-tag .txt { padding: 14px 30px 14px 24px; }
+.e-tag small { display: block; font-size: 19px; letter-spacing: .22em; color: var(--mu); font-weight: 500; }
+.e-tag b { display: block; font-size: 40px; font-weight: 800; letter-spacing: -0.02em; color: var(--tx); white-space: nowrap; }
+#url { position: relative; }
+.e-chip { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 3px 14px; border-radius: 999px; background: var(--p); color: #fff; font-weight: 700; letter-spacing: .08em; opacity: 0; font-size: .9em; }
+
+.badge { font-weight: 800 !important; background: var(--sf) !important; color: var(--tx) !important; border: 3px solid var(--tx) !important; box-shadow: 6px 6px 0 color-mix(in oklab, var(--tx) 15%, transparent) !important; }
+.badge .num { border-radius: 10px !important; }
+.caption span { background: var(--tx) !important; font-weight: 600 !important; border-radius: 12px !important; }
+
+/* Outro */
+.e-otitle { position: absolute; left: 124px; top: 300px; width: 920px; font-size: 104px; line-height: 1.02; font-weight: 800; letter-spacing: -0.04em; color: #fff; z-index: 1; }
+.e-cta { position: absolute; left: 130px; top: 640px; padding: 22px 40px; border-radius: 14px; background: var(--s); color: var(--tx); font-size: 34px; font-weight: 800; z-index: 1; }
+.e-list .e-row b::before { content: '✓  '; color: var(--s); }
+
+/* la plantilla da margen a cada span del título; aquí solo lo lleva la palabra */
+#intro h1 span { margin-right: 0; }
+#intro h1 .w { margin-right: .24em; }

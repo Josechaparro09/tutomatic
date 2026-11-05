@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "default": "Tutorial",
+      "type": "string"
+    },
+    "primary": {
+      "default": "#4F46E5",
+      "type": "string"
+    },
+    "secondary": {
+      "default": "#22D3EE",
+      "type": "string"
+    },
+    "background": {
+      "default": "#0B1020",
+      "type": "string"
+    },
+    "surface": {
+      "default": "#151B2E",
+      "type": "string"
+    },
+    "text": {
+      "default": "#F5F7FF",
+      "type": "string"
+    },
+    "mutedText": {
+      "default": "#A9B1CC",
+      "type": "string"
+    },
+    "fontFamily": {
+      "default": "Inter",
+      "type": "string"
+    },
+    "logo": {
+      "default": null,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "theme": {
+      "default": "dark",
+      "type": "string",
+      "enum": [
+        "dark",
+        "light"
+      ]
+    },
+    "radius": {
+      "default": 18,
+      "type": "number"
+    }
+  }
+}
