@@ -1,4 +1,4 @@
-# tutomatic
+# Tutomatic
 
 CLI para que un agente de IA (Claude, u otro con terminal) **grabe y produzca videos tutoriales de una app web**: inicia sesión, sigue un guion (storyboard), graba con cursor animado y zoom, genera la voz y la música con IA, subtítulos, capítulos, identidad visual y miniatura, y renderiza con **Remotion** o **HyperFrames**.
 
@@ -9,33 +9,69 @@ storyboard.json ──► voz (Gemini TTS) ──► grabación (Playwright, sin
                  ──► timeline.json ──► render: Remotion | HyperFrames ──► MP4 + SRT/VTT + miniatura
 ```
 
-## Instalación (Windows, macOS o Linux)
+## Instalación
 
-Requisitos: **Node.js 22+**.
+**Windows**
 
-```bash
+```powershell
+git clone https://github.com/Josechaparro09/tutomatic
 cd tutomatic
-npm install
-npx playwright install chromium
-copy .env.example .env        # en macOS/Linux: cp .env.example .env
+.\install.cmd
 ```
 
-En `.env` pon tu `GEMINI_API_KEY` (https://aistudio.google.com/apikey) y el usuario y la clave de la app (`TUTO_USER`, `TUTO_PASSWORD`). Luego verifica:
+También puedes dar doble clic en `install.cmd`. El instalador:
+- instala Node.js y Git si faltan (con winget);
+- instala las dependencias;
+- registra el comando `tutomatic`;
+- abre el asistente de configuración.
+
+**Mac / Linux**
 
 ```bash
-tutomatic doctor
+git clone https://github.com/Josechaparro09/tutomatic
+cd tutomatic
+./install.sh
 ```
 
-FFmpeg viene incluido (`ffmpeg-static`). Para usar `tuto` como comando global: `npm link`.
+El repositorio es privado: la primera vez, Git te pide que inicies sesión en GitHub.
+
+## Configuración: `tutomatic setup`
+
+Un asistente con menús te pregunta todo y lo guarda por ti en `tutomatic.config.yaml` y `.env`. Ninguno de los dos se sube a git.
+
+| Sección | Qué configura |
+|---|---|
+| requisitos | Node, FFmpeg (ofrece instalarlo) y Chromium |
+| voz | Google Gemini (clave + voz), **VoiceStudio** local (detecta tus voces clonadas), ElevenLabs u OpenAI |
+| musica | Lyria (Google) o sin música |
+| motor | **HyperFrames** o Remotion, tarjeta gráfica y calidad |
+| diseño | estilo por defecto: Ruta, Etiqueta, Suave o ninguno; lo puede aplicar a tus proyectos |
+| app | el usuario y la contraseña de la app que vas a grabar (la contraseña se escribe oculta) |
+| skill | instala la skill para Claude Code y genera `tutomatic.skill` para la app de Claude |
+
+Para cambiar solo una parte: `tutomatic setup --only voz` (o `musica`, `motor`, `diseño`, `app`, `skill`; varias separadas por comas).
+
+| Comando | Para qué |
+|---|---|
+| `tutomatic doctor` | Revisa que todo funcione |
+| `tutomatic demo` | Hace un video de prueba con la app de ejemplo, gratis |
+| `tutomatic update` | Baja la última versión y actualiza la skill |
+| `tutomatic where` | Dice dónde está instalado |
+
+## La skill para Claude
+
+- **Claude Code:** `tutomatic setup --only skill` (o `tutomatic skill`) la copia a `~/.claude/skills/tutomatic`.
+- **App de Claude (web o escritorio):** sube `tutomatic.skill`, que se crea en la carpeta del proyecto, en Configuración → Capacidades → Skills. Con hacerlo una vez en tu cuenta queda disponible en todos tus equipos.
+
+Luego pídele a Claude algo como: *"Haz un tutorial de cómo crear un envío en mi app"*.
 
 ## Pruébalo con la app de demo (sin claves, gratis)
 
 ```bash
-npm run demo-app                                        # http://localhost:4321  (demo@facturin.co / demo123)
-# en otra terminal:
-tutomatic rehearse facturin-nueva-factura --until guardar
-tutomatic build facturin-nueva-factura --mock --draft
+tutomatic demo          # levanta la app de ejemplo, ensaya y renderiza un borrador
 ```
+
+O paso a paso: `npm run demo-app` (http://localhost:4321) y en otra terminal `tutomatic rehearse facturin-nueva-factura`, seguido de `tutomatic build facturin-nueva-factura --mock --draft`.
 
 El resultado queda en `projects/facturin-nueva-factura/output/`. Con `--mock` la voz y la música son sintéticas (sirven para revisar tiempos) y `--draft` renderiza rápido a media resolución. Quita ambas para el video final con Gemini y Lyria.
 
@@ -79,7 +115,7 @@ Voz: `google` (Gemini 3.8 Flash TTS), `voicestudio` (local en tu PC, sin interne
 ## Estructura
 
 ```
-bin/tuto.js                 punto de entrada (TypeScript vía tsx, sin compilar)
+bin/tutomatic.js            punto de entrada (TypeScript vía tsx, sin compilar; bin/tuto.js es un alias)
 src/cli.ts                  comandos
 src/recorder/               Playwright: login, cursor, screencast CDP, inspect, brand
 src/providers/              Google, ElevenLabs, OpenAI, mock
